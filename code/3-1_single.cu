@@ -11,13 +11,13 @@ int main()
     int size = sizeof(int);
 
     //// Allocate memory to device
-    //// Allocate memory to d_b and d_c using the following example
+    //// Allocate memory to d_a, d_b, and d_c using the following example
     cudaMalloc((void **)&d_a, size);
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
     //// Copy inputs to device
-    //// Copy input to d_b using the following example
+    //// Copy input to d_a, d_b using the following example
     cudaMemcpy(d_a, &a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, &b, size, cudaMemcpyHostToDevice);
 
@@ -25,7 +25,7 @@ int main()
     add<<<1, 1>>>(d_a, d_b, d_c);
     cudaDeviceSynchronize();
 
-    //// Copy result from device to host
+    //// Copy result from device (d_c) to host (c)
     //// What is the difference of this line compared to above cudaMemcpy?
     cudaMemcpy(&c, d_c, size, cudaMemcpyDeviceToHost);
 

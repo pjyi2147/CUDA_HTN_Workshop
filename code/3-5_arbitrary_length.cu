@@ -1,6 +1,6 @@
-
 #include <stdio.h>
 
+// Arbitrary array length
 #define N 50
 
 #define BLOCK_SIZE 16
@@ -13,10 +13,11 @@ void random_ints(int *a, int n)
     }
 }
 
+// Why length variable is added to the kernel now?
 __global__ void add(int *a, int *b, int *c, int len)
 {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
     // check the difference here
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < len)
     {
         c[idx] = a[idx] + b[idx];
@@ -36,14 +37,11 @@ int main()
     // device copies of a, b, c
     int *d_a, *d_b, *d_c;
 
-    // Allocate memory to device
-    // Allocate memory to d_b and d_c using the following example
+    //// Allocate memory to d_a, d_b, and d_c
     cudaMalloc((void **)&d_a, size);
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-
-    //// Copy inputs to device
     //// Copy input to d_b using the following example
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
@@ -54,8 +52,7 @@ int main()
     add<<<NUMBLOCKS, BLOCK_SIZE>>>(d_a, d_b, d_c, N);
     cudaDeviceSynchronize();
 
-    //// Copy result from device to host
-    //// What is the difference of this line compared to above cudaMemcpy?
+    //// Copy result from device (d_c) to host (c)
     cudaMemcpy(c, d_c, size, cudaMemcpyDeviceToHost);
 
     //// print result, is result correct?
@@ -65,7 +62,7 @@ int main()
     }
 
     //// Memory cleanup!
-    //// Clean up memory for d_a, d_b, d_c with following example.
+    //// Clean up memory for d_a, d_b, d_c
     cudaFree(d_a);
     cudaFree(d_b);
     cudaFree(d_c);
