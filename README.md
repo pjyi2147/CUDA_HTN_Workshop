@@ -1,10 +1,20 @@
 # CUDA_HTN_Workshop
 
-Repository for CUDA workshop in 2024 Hack The North!
+Repository for Introduction to Nvidia CUDA workshop in the Hack The North 2024!
 
-Check out `notebook.ipynb` and `slide.pptx` for workshop notes!
+## Instructions:
 
-### Submitting benchmarks
+### `notebook.ipynb`
+
+Open `notebook.ipynb` and click `open in colab` button at the top!
+
+Copy notebook to your drive to save changes 😊
+
+### `slides.pdf`
+
+Your slides for the workshop!
+
+## Submitting benchmarks
 
 1. Fork this repository
 2. Create a folder with your username under `benchmarks`
