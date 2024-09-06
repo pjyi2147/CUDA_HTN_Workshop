@@ -13,6 +13,7 @@ void random_ints(int *a, int n)
 __global__ void add(int *a, int *b, int *c)
 {
     //// We are using the same number of blocks as the array length
+    //// Use blockIdx.x for this section
     c[blockIdx.x] = a[blockIdx.x] + b[blockIdx.x];
 }
 

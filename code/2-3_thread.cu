@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-#define N 32
-
-#define BLOCK_SIZE 16
+#define N 16
 
 void random_ints(int *a, int n)
 {
@@ -14,8 +12,9 @@ void random_ints(int *a, int n)
 
 __global__ void add(int *a, int *b, int *c)
 {
-    int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    c[idx] = a[idx] + b[idx];
+    //// We are using the same number of threads as the array length
+    //// Use threadIdx.x for this section
+    c[threadIdx.x] = a[threadIdx.x] + b[threadIdx.x];
 }
 
 int main()
@@ -28,7 +27,7 @@ int main()
     int *c = (int *)malloc(size);
     memset(c, 0, size);
 
-    // device copies of a, b, c
+    //// device copies of a, b, c
     int *d_a, *d_b, *d_c;
 
     //// Allocate memory to d_a, d_b, and d_c
@@ -36,14 +35,13 @@ int main()
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-
     //// Copy input to d_a, d_b
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
 
     //// Launch kernel
-    int NUMBLOCKS = N / BLOCK_SIZE;
-    add<<<NUMBLOCKS, BLOCK_SIZE>>>(d_a, d_b, d_c);
+    //// N is placed in right side of the brackets (threads)
+    add<<<1, N>>>(d_a, d_b, d_c);
     cudaDeviceSynchronize();
 
     //// Copy result from device (d_c) to host (c)

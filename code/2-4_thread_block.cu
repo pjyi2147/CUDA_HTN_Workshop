@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-// Arbitrary array length
-#define N 50
+#define N 32
 
 #define BLOCK_SIZE 16
 
@@ -13,15 +12,12 @@ void random_ints(int *a, int n)
     }
 }
 
-// Why length variable is added to the kernel now?
-__global__ void add(int *a, int *b, int *c, int len)
+__global__ void add(int *a, int *b, int *c)
 {
-    // check the difference here
+    //// We now use both blockIdx and threadIdx!
+    //// Use blockIdx.x, blockDim.x, and threadIdx.x for this section
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    if (idx < len)
-    {
-        c[idx] = a[idx] + b[idx];
-    }
+    c[idx] = a[idx] + b[idx];
 }
 
 int main()
@@ -42,14 +38,14 @@ int main()
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-    //// Copy input to d_b using the following example
+
+    //// Copy input to d_a, d_b
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
 
     //// Launch kernel
-    //// what's the difference here?
-    int NUMBLOCKS = (N - 1) / BLOCK_SIZE + 1;
-    add<<<NUMBLOCKS, BLOCK_SIZE>>>(d_a, d_b, d_c, N);
+    int NUMBLOCKS = N / BLOCK_SIZE;
+    add<<<NUMBLOCKS, BLOCK_SIZE>>>(d_a, d_b, d_c);
     cudaDeviceSynchronize();
 
     //// Copy result from device (d_c) to host (c)
