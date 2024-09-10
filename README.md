@@ -10,14 +10,14 @@ Open `notebook.ipynb` and click `open in colab` button at the top!
 
 Copy notebook to your drive to save changes 😊
 
-### `slides.pdf`
+### `Introduction_to_Nvidia_CUDA_slides.pdf`
 
 Your slides for the workshop!
 
 ## Submitting benchmarks
 
 1. Fork this repository
-2. Create a folder with your username under `benchmarks`
+2. Create a folder with your username under `PR`
 3. Put your benchmark results
 4. Submit a PR
-5. I will approve it, and it will be merged to this repo!
+5. I will approve/comment it, and it will be merged to this repo once approved!
