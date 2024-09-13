@@ -10,6 +10,7 @@ void random_ints(int *a, int n)
     }
 }
 
+// add kernel
 __global__ void add(int *a, int *b, int *c)
 {
     //// We are using the same number of threads as the array length
@@ -35,7 +36,7 @@ int main()
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-    //// Copy input to d_a, d_b
+    //// Copy a, b to d_a, d_b
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
 

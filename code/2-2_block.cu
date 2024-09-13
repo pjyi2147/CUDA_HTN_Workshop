@@ -35,7 +35,7 @@ int main()
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-    //// Copy input to d_a, d_b
+    //// Copy a, b to d_a, d_b
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
 
@@ -59,7 +59,7 @@ int main()
     cudaFree(d_b);
     cudaFree(d_c);
 
-    //// Of course the same for host memory, too.
+    //// Of course, we need to do the same for host memory
     free(a);
     free(b);
     free(c);

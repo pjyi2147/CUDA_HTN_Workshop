@@ -39,7 +39,7 @@ int main()
     cudaMalloc((void **)&d_c, size);
 
 
-    //// Copy input to d_a, d_b
+    //// Copy a, b to d_a, d_b
     cudaMemcpy(d_a, a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, b, size, cudaMemcpyHostToDevice);
 

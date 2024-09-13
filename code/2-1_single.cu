@@ -16,8 +16,8 @@ int main()
     cudaMalloc((void **)&d_b, size);
     cudaMalloc((void **)&d_c, size);
 
-    //// Copy inputs to device
-    //// Copy input to d_a, d_b using the following example
+    //// Copy a, b to device
+    //// Copy a, b to d_a, d_b using the following example
     cudaMemcpy(d_a, &a, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_b, &b, size, cudaMemcpyHostToDevice);
 
