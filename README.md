@@ -10,10 +10,6 @@ Open `notebook.ipynb` and click `open in colab` button at the top!
 
 Copy notebook to your drive to save changes 😊
 
-### `Introduction_to_Nvidia_CUDA_slides.pdf`
-
-Your slides for the workshop!
-
 ## Submitting benchmarks
 
 1. Fork this repository
