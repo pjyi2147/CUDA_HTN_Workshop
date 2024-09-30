@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fpjyi2147%2FCUDA_HTN_Workshop&count_bg=%23FFBC93&title_bg=%238FC2FF&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # CUDA_HTN_Workshop
 
 Repository for Introduction to Nvidia CUDA workshop in the Hack The North 2024!
